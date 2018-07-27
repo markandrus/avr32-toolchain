@@ -33,14 +33,13 @@ in
       pkgs.unzip
     ];
     preBuild = ''
-      m4 --version
       unset SSL_CERT_FILE
       export HOME=$(pwd)
       export CFLAGS=-Wno-error=format-security
       export CXXFLAGS=-Wno-error=format-security
     '';
-    buildFlags = [
-      "install-cross"
-    ];
+    installPhase = ''
+      make install-cross
+    '';
     src = ./.;
   }

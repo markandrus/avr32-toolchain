@@ -2,3 +2,8 @@ language: nix
 os:
   - linux
   - osx
+script: |
+  travis_wait 60 nix-build -K -Q
+  if [ $? -ne 0 ]; then
+    echo "Figure out how to print log."
+  fi
