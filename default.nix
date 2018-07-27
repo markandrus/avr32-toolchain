@@ -14,6 +14,8 @@ let
 
   pkgs = import nixpkgs {};
 
+  syspkgs = import <nixpkgs> {};
+
 in
 
   pkgs.stdenv.mkDerivation {
@@ -24,13 +26,14 @@ in
       pkgs.gmp
       pkgs.gperf_3_0
       pkgs.libmpc
-      pkgs.m4
+      syspkgs.m4
       pkgs.mpfr
       pkgs.perl
       pkgs.texinfo4
       pkgs.unzip
     ];
     preBuild = ''
+      m4 --version
       unset SSL_CERT_FILE
       export HOME=$(pwd)
       export CFLAGS=-Wno-error=format-security
